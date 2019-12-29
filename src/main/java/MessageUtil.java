@@ -1,4 +1,4 @@
-package TestMessageUtil
+package TestMessageUtil;
 public class MessageUtil {
 	  private String message;
 
