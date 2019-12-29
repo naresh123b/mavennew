@@ -1,4 +1,3 @@
-package TestMessageUtil;
 public class MessageUtil {
 	  private String message;
 
