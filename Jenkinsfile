@@ -1,7 +1,7 @@
 pipeline{
 		 environment
 			 {
-				 HOME = "HOME folder"
+				 HOME = "E004415"
 				 WORKSPACE_FOLDER = "C:\\Users\\$HOME\\jenkins\\ws" 
 			 RUN_FOLDER       = "C:\\Users\\$HOME\\jenkins"
 			 }
@@ -41,7 +41,7 @@ checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleC
 						 bat label: '', script: '''cd ..
 del messageUtil-2.0-SNAPSHOT.jar
 cd ws\\target
-move messageUtil-2.0-SNAPSHOT.jar C:\\Users\\E004415\\jenkins
+move messageUtil-2.0-SNAPSHOT.jar C:\\Users\\$HOME\\jenkins
 '''}
                    
 				   ws("${RUN_FOLDER}"){
