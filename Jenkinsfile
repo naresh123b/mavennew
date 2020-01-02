@@ -37,8 +37,11 @@ checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleC
 				   steps{
 				   ws("${WORKSPACE_FOLDER}"){
 				         echo "Moving an application"
-						 bat label: '', script: '''C:\\Users\\E004415\\jenkins\\ws\\target
-move messageUtil-2.0-SNAPSHOT.jar C:\\Users\\E004415\\jenkins'''}
+						 bat label: '', script: '''cd ..
+del messageUtil-2.0-SNAPSHOT.jar
+cd ws\\target
+move messageUtil-2.0-SNAPSHOT.jar C:\\Users\\E004415\\jenkins
+'''}
                    
 				   ws("${RUN_FOLDER}"){
 				         echo "Running an application"
