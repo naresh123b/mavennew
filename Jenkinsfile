@@ -1,7 +1,7 @@
 pipeline{
 		 environment
 			 {
-				 HOME = "E004415"
+				 HOME = "HOME folder"
 				 WORKSPACE_FOLDER = "C:\\Users\\$HOME\\jenkins\\ws" 
 			 RUN_FOLDER       = "C:\\Users\\$HOME\\jenkins"
 			 }
