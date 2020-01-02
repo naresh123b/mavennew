@@ -2,6 +2,7 @@ pipeline{
 		 environment
 			 {
 			 WORKSPACE_FOLDER = "C:\\Users\\E004415\\jenkins\\ws" 
+			 RUN_FOLDER       = "C:\\Users\\E004415\\jenkins"
 			 }
 			 agent any
 			     tools {
@@ -31,6 +32,20 @@ checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleC
 				         echo "Building an application"
 						 bat label: '', script: 'mvn install'}
 				   }
+				}
+				stage('Move maven application'){
+				   steps{
+				   ws("${WORKSPACE_FOLDER}"){
+				         echo "Moving an application"
+						 bat label: '', script: '''C:\\Users\\E004415\\jenkins\\ws\\target
+move messageUtil-2.0-SNAPSHOT.jar C:\\Users\\E004415\\jenkins'''}
+                   
+				   ws("${RUN_FOLDER}"){
+				         echo "Running an application"
+						 bat label: '', script: 'java -jar messageUtil-2.0-SNAPSHOT.jar &'
+                   
+				   }
+				}
 				}
 				}
 				}
