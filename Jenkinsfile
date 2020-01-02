@@ -1,9 +1,13 @@
 pipeline{
 		 environment
 			 {
-			 WORKSPACE_FOLDER = "C:\\Users\\E004415\\jenkins\\ws" 
+			 WORKSPACE_FOLDER = "C:\\Users\\E004415\\jenkins\\ws\\*" 
 			 }
 			 agent any
+			     tools {
+        maven 'Maven 3.3.9'
+        jdk 'jdk8'
+    }
 			 
 			 stages{
 					stage('clean workspace'){
@@ -19,5 +23,10 @@ checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleC
 		}
 					
 				}
+				stage('Build maven application'){
+				   steps{
+				   
+				   }
+				   }
 				}
 				}
