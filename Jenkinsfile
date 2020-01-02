@@ -1,8 +1,9 @@
 pipeline{
 		 environment
 			 {
-			 WORKSPACE_FOLDER = "C:\\Users\\E004415\\jenkins\\ws" 
-			 RUN_FOLDER       = "C:\\Users\\E004415\\jenkins"
+				 HOME = "E004415"
+				 WORKSPACE_FOLDER = "C:\\Users\\"${HOME}"\\jenkins\\ws" 
+			 RUN_FOLDER       = "C:\\Users\\"${HOME}"\\jenkins"
 			 }
 			 agent any
 			     tools {
