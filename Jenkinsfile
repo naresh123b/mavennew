@@ -25,7 +25,7 @@ checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleC
 				}
 				stage('Build maven application'){
 				   steps{
-				   
+				         echo "Building as application"
 				   }
 				   }
 				}
