@@ -1,7 +1,7 @@
 pipeline{
 		 environment
 			 {
-			 WORKSPACE_FOLDER = "C:\\Users\\E004415\\jenkins\\ws\\*" 
+			 WORKSPACE_FOLDER = "C:\\Users\\E004415\\jenkins\\ws" 
 			 }
 			 agent any
 			     tools {
