@@ -1,9 +1,8 @@
 pipeline{
 		 environment
 			 {
-				 HOME = "Home folder"
-				 WORKSPACE_FOLDER = "C:\\Users\\$HOME\\jenkins\\ws" 
-			 RUN_FOLDER       = "C:\\Users\\$HOME\\jenkins"
+			 WORKSPACE_FOLDER = "C:\\Users\\E004415\\jenkins\\ws" 
+			 RUN_FOLDER       = "C:\\Users\\E004415\\jenkins"
 			 }
 			 agent any
 			     tools {
@@ -34,21 +33,12 @@ checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleC
 						 bat label: '', script: 'mvn install'}
 				   }
 				}
-				stage('Move maven application'){
+				stage('Publish artifacts to remote server and run application'){
 				   steps{
 				   ws("${WORKSPACE_FOLDER}"){
-				         echo "Moving an application"
-						 bat label: '', script: '''cd ..
-del messageUtil-2.0-SNAPSHOT.jar
-cd ws\\target
-move messageUtil-2.0-SNAPSHOT.jar ..\\..
-'''}
+				         sshPublisher(publishers: [sshPublisherDesc(configName: 'ansible', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''cd /home/taxadmin/jenkinsnew/target
+java -jar messageUtil-2.0-SNAPSHOT.jar > outout.txt &''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'target/*.jar')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])}
                    
-				   ws("${RUN_FOLDER}"){
-				         echo "Running an application"
-						 bat label: '', script: 'java -jar messageUtil-2.0-SNAPSHOT.jar &'
-                   
-				   }
 				}
 				}
 				}
