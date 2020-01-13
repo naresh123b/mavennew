@@ -1,1 +1,44 @@
-
+pipeline{
+		 environment
+			 {
+			 WORKSPACE_FOLDER = "/home/jenkins/workspace" 
+			 RUN_FOLDER       = "/home/jenkins"
+			 }
+			 agent {
+			   label 'dockerhost'
+			 }
+			     tools {
+        maven 'maven'
+        jdk 'javanew'
+    }
+			 
+			 stages{
+			        
+					stage('create container'){
+					steps {
+					sh label: 'dockerhost', script: 'docker container run -itd --network naresh --ip 172.18.0.4 -p 2020:22 -v /home/jenkins/workspace:/home/jenkins/workspace --name sshcnt7latest1 nareshb123ab/sshcnt7latest1'
+					}
+					}
+							stage('Git Checkout') {
+				 steps {
+				 ws("${WORKSPACE_FOLDER}"){checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/naresh123b/mavennew.git']]])}
+		}
+					
+				}
+				stage('Build maven application'){
+				   steps{
+				   ws("${WORKSPACE_FOLDER}"){
+				         echo "Building an application"
+						 bat label: 'dockerslave', script: 'mvn install'}
+				   }
+				}
+				stage('Delete container'){
+				   steps{
+				{
+				         sh label: 'dockerhost', script: 'docker rm -f sshcnt7latest1'
+                   
+				}
+				}
+				}
+				}
+				}
