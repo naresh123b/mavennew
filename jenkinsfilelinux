@@ -5,7 +5,7 @@ pipeline{
 			 RUN_FOLDER       = "/home/jenkins"
 			 }
 			 agent {
-			   label 'dockerhost'
+			   label 'dockerslave'
 			 }
 			     tools {
         maven 'maven'
