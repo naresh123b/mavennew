@@ -34,10 +34,10 @@ pipeline{
 				}
 				stage('Delete container'){
 				   steps{
-				{
+				
 				         sh label: 'dockerhost', script: 'docker rm -f sshcnt7latest1'
                    
-				}
+				
 				}
 				}
 				}
